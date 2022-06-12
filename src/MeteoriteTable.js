@@ -9,14 +9,11 @@ export default function MeteoriteTable(props) {
   const [meteoriteInfo, setMeteoriteInfo] = useState([]);
   useEffect(() => {
     axios.get('https://data.nasa.gov/resource/gh4g-9sfh.json')
-    .then((res) => {
-      setMeteoriteInfo(filterMeteoriteData(props.inputName, res.data));
-      console.log("first Meteorite data: ", meteoriteInfo);
-    })
+    .then((res) => setMeteoriteInfo(filterMeteoriteData(props.inputName, res.data)))
   }, []);
   return (
     <div>
-      <MeteoriteInfoRow {...meteoriteInfo}/>
+      <MeteoriteInfoRow selectedMeteors={meteoriteInfo}/>
     </div>
   );
 }
