@@ -3,7 +3,6 @@ import './App.css';
 import axios from 'axios';
 import {React, useEffect} from 'react';
 // import SendIcon from '@mui/icons-material/Send';
-import MeteoriteTable from './MeteoriteTable';
 import Input from './Input';
 // import { FormControl, InputLabel, Input, FormHelperText } from '@mui/material';
 
