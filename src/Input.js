@@ -42,8 +42,9 @@ export default function Input(props) {
   // };
   // console.log('chosen Meteor', meteoriteInfo);
   // useEffect(chosenMeteor,[]);
+  //display search results as user is typing
   return(
-    <div>
+    <div style={{display: 'flex', flexDirection: 'column', padding: '50px', margin: '30px'}}>
         <input style={{margin: 'auto'}}
             value={inputData}
             onChange={(e) => inputValue(e.target.value)}
