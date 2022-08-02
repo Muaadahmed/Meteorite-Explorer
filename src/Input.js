@@ -1,6 +1,6 @@
 import {React, useEffect, useState} from 'react';
 import axios from 'axios';
-// import {filterMeteoriteData} from './helpers';
+import {formatDate} from './helpers';
 // import Button from './Button';
 export default function Input(props) {
   const [inputData, setInputData] = useState("");
@@ -18,12 +18,14 @@ export default function Input(props) {
     return filteresMeteorite;
   }
 
+  console.log(meteoriteInfo);
   const inputValue = (search) => {
     //Display all meteorite Data when search is empty
     if (search !== ""){
       setInputData(search);
       setFilteredData(chosenMeteor(search));
     } else {
+      setInputData("");
       setFilteredData(meteoriteInfo);
     }
 
@@ -42,14 +44,14 @@ export default function Input(props) {
   // useEffect(chosenMeteor,[]);
   return(
     <div>
-        <input
+        <input style={{margin: 'auto'}}
             value={inputData}
             onChange={(e) => inputValue(e.target.value)}
             type="text"
             placeholder="Enter Meteorite Name"
           />
       <table>
-        <thead>
+        <thead style={{margin: '50px 20px 50px 20px', textAlign: "left"}}>
           <tr>
             <th>name</th>
             <th>id</th>
@@ -64,6 +66,7 @@ export default function Input(props) {
         </thead>
         <tbody style={{marginTop: '20px'}}>
           {filterData.map((meteorite, index) => {
+            console.log(meteorite);
             return(
               <tr key={index}>
                 <td>{meteorite.name}</td>
@@ -72,9 +75,9 @@ export default function Input(props) {
                 <td>{meteorite.recclass}</td>
                 <td>{meteorite.mass}</td>
                 <td>{meteorite.fall}</td>
-                <td>{meteorite.year}</td>
-                <td>{!meteorite.geolocation ? "N/A" : meteorite.geolocation.latitude}</td>
-                <td>{!meteorite.geolocation ? "N/A" : meteorite.geolocation.longitude}</td>
+                <td style={{paddingRight: '20px'}}>{!meteorite.year ? "N/A" : formatDate(meteorite.year)}</td>
+                <td style={{paddingRight: '20px'}}>{!meteorite.geolocation ? "N/A" : meteorite.geolocation.latitude}</td>
+                <td style={{marginTop: '20px'}}>{!meteorite.geolocation ? "N/A" : meteorite.geolocation.longitude}</td>
               </tr>
             )
           })}
