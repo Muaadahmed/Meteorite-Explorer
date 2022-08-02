@@ -11,7 +11,6 @@ export default function Input(props) {
   // const chosenMeteor = () => {
   const chosenMeteor = (input) => {
     // setFilteredData(filterMeteoriteData(input, meteoriteInfo));
-    console.log(meteoriteInfo);
     const filteresMeteorite = meteoriteInfo.filter(meteor => input.toLowerCase().includes(meteor.name.toLowerCase()));
     // console.log(filteresMeteorite);
     // console.log(filterMeteoriteData(input, meteoriteInfo));
@@ -20,8 +19,13 @@ export default function Input(props) {
   }
 
   const inputValue = (search) => {
+    //Display all meteorite Data when search is empty
+    if (search !== ""){
       setInputData(search);
       setFilteredData(chosenMeteor(search));
+    } else {
+      setFilteredData(meteoriteInfo);
+    }
 
     // console.log("search input: ", search);
   }
@@ -38,27 +42,12 @@ export default function Input(props) {
   // useEffect(chosenMeteor,[]);
   return(
     <div>
-      {/* <form noValidate autoComplete='off' style={{margin: ""}} onSubmit={(e) => {
-        e.preventDefault();
-        setInputData({meteoriteName: e.target[0].value});
-      }}> */}
-      {/* <form onSubmit={e => {
-        e.preventDefault();
-        // console.log('chosen Meteor', meteoriteInfo);
-        // console.log("chosen meteor", chosenMeteor);
-      }}> */}
         <input
             value={inputData}
             onChange={(e) => inputValue(e.target.value)}
             type="text"
             placeholder="Enter Meteorite Name"
           />
-          {/* <input type="submit" /> */}
-      {/* </form> */}
-        {/* <input type='submit' onChange={(e) => setInputData(e.target.value)}/> */}
-        {/* <button type="submit" onClick={() => inputData.meteoriteName}/> */}
-        {/* <Button type="submit" variant='outlined'color='secondary' inputVal ={inputData}>Find</Button> */}
-      {/* </form> */}
       <table>
         <thead>
           <tr>
@@ -84,8 +73,8 @@ export default function Input(props) {
                 <td>{meteorite.mass}</td>
                 <td>{meteorite.fall}</td>
                 <td>{meteorite.year}</td>
-                <td>{meteorite.geolocation.latitude}</td>
-                <td>{meteorite.geolocation.longitude}</td>
+                <td>{!meteorite.geolocation ? "N/A" : meteorite.geolocation.latitude}</td>
+                <td>{!meteorite.geolocation ? "N/A" : meteorite.geolocation.longitude}</td>
               </tr>
             )
           })}
