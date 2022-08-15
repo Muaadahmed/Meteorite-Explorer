@@ -18,26 +18,31 @@ export default function Input(props) {
     return filteresMeteorite;
   }
 
-  console.log(meteoriteInfo);
+  // console.log(meteoriteInfo);
   const inputValue = (search) => {
     //Display all meteorite Data when search is empty
+    setInputData(search);
     if (search !== ""){
-      setInputData(search);
       setFilteredData(chosenMeteor(search));
     } else {
-      setInputData("");
       setFilteredData(meteoriteInfo);
     }
-
     // console.log("search input: ", search);
   }
   useEffect(() => {
-    axios.get('https://data.nasa.gov/resource/gh4g-9sfh.json')
-    .then((res) => setMeteoriteInfo(res.data))
+    axios.get('https://data.nasa.gov/resource/gh4g-9sfh.jon')
+    .then((res) => {
+      setFilteredData(res.data);
+      setMeteoriteInfo(res.data);
+    })
       // console.log("inputData: ", inputData);
       // console.log("log filtered data: ", filterMeteoriteData(inputData, res.data));
       // setMeteoriteInfo(res.data.filter(data => inputData.toLowerCase() === data.name.toLowerCase()))})
-    .catch((err) => console.log(err.response.status));
+    .catch((err) => {
+      setMeteoriteInfo([]);
+      setFilteredData([]);
+      console.log("API resquest failed: ", err.response.status)
+    })
   }, []);
   // };
   // console.log('chosen Meteor', meteoriteInfo);
@@ -45,12 +50,15 @@ export default function Input(props) {
   //display search results as user is typing
   return(
     <div style={{display: 'flex', flexDirection: 'column', padding: '50px', margin: '30px'}}>
-        <input style={{margin: 'auto'}}
-            value={inputData}
-            onChange={(e) => inputValue(e.target.value)}
-            type="text"
-            placeholder="Enter Meteorite Name"
-          />
+      <input style={{margin: 'auto'}}
+          value={inputData}
+          onChange={(e) => inputValue(e.target.value)}
+          type="text"
+          placeholder="Enter Meteorite Name"
+        />
+        <div style={{textAlign: 'center'}}>
+          {meteoriteInfo.length === 0 && <h1 style={{color: 'lightgrey'}}>API resquest failed</h1>}
+        </div>
       <table>
         <thead style={{margin: '50px 20px 50px 20px', textAlign: "left"}}>
           <tr>
@@ -66,24 +74,43 @@ export default function Input(props) {
           </tr>
         </thead>
         <tbody style={{marginTop: '20px'}}>
-          {filterData.map((meteorite, index) => {
-            console.log(meteorite);
-            return(
-              <tr key={index}>
-                <td>{meteorite.name}</td>
-                <td>{meteorite.id}</td>
-                <td>{meteorite.nametype}</td>
-                <td>{meteorite.recclass}</td>
-                <td>{meteorite.mass}</td>
-                <td>{meteorite.fall}</td>
-                <td style={{paddingRight: '20px'}}>{!meteorite.year ? "N/A" : formatDate(meteorite.year)}</td>
-                <td style={{paddingRight: '20px'}}>{!meteorite.geolocation ? "N/A" : meteorite.geolocation.latitude}</td>
-                <td style={{marginTop: '20px'}}>{!meteorite.geolocation ? "N/A" : meteorite.geolocation.longitude}</td>
-              </tr>
-            )
+          {filterData.length !== 0 && filterData.map((meteorite, index) => {
+              return(
+                <tr key={index}>
+                  <td>{meteorite.name}</td>
+                  <td>{meteorite.id}</td>
+                  <td>{meteorite.nametype}</td>
+                  <td>{meteorite.recclass}</td>
+                  <td>{meteorite.mass}</td>
+                  <td>{meteorite.fall}</td>
+                  <td style={{paddingRight: '20px'}}>{!meteorite.year ? "N/A" : formatDate(meteorite.year)}</td>
+                  <td style={{paddingRight: '20px'}}>{!meteorite.geolocation ? "N/A" : meteorite.geolocation.latitude}</td>
+                  <td style={{marginTop: '20px'}}>{!meteorite.geolocation ? "N/A" : meteorite.geolocation.longitude}</td>
+                </tr>
+              )
           })}
+          {/* // }): filterData.map((meteorite, index) => {
+          //   return(
+          //     <tr key={index}>
+          //       <td>{meteorite.name}</td>
+          //       <td>{meteorite.id}</td>
+          //       <td>{meteorite.nametype}</td>
+          //       <td>{meteorite.recclass}</td>
+          //       <td>{meteorite.mass}</td>
+          //       <td>{meteorite.fall}</td>
+          //       <td style={{paddingRight: '20px'}}>{!meteorite.year ? "N/A" : formatDate(meteorite.year)}</td>
+          //       <td style={{paddingRight: '20px'}}>{!meteorite.geolocation ? "N/A" : meteorite.geolocation.latitude}</td>
+          //       <td style={{marginTop: '20px'}}>{!meteorite.geolocation ? "N/A" : meteorite.geolocation.longitude}</td>
+          //     </tr>
+          //   )
+          // })} */}
         </tbody>
       </table>
+      <div style={{textAlign: 'center'}}>
+        {filterData.length === 0 && meteoriteInfo.length === 0 ? "" 
+          : filterData.length === 0 ? <h1 style={{color: 'lightgrey'}}>Meteor Does not Exist</h1> 
+            : ""}
+      </div>
     </div>
   );
 };

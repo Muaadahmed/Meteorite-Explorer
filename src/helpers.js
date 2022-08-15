@@ -10,7 +10,6 @@ function formatDate(data) {
     year: 'numeric'
   });
   const date = new Date(data);
-  console.log(date);
   return dtFormat.format(date);
 }
 // const filteredMeteoriteData = res.data.filter(data => {
