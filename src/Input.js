@@ -30,8 +30,9 @@ export default function Input(props) {
     // console.log("search input: ", search);
   }
   useEffect(() => {
-    axios.get('https://data.nasa.gov/resource/gh4g-9sfh.jon')
+    axios.get('https://data.nasa.gov/resource/gh4g-9sfh.json')
     .then((res) => {
+      setLoading(false);
       setFilteredData(res.data);
       setMeteoriteInfo(res.data);
     })
