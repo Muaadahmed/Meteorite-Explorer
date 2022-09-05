@@ -19,7 +19,17 @@ export default function Input(props) {
   }
 
   // console.log(meteoriteInfo);
+  function debounce(func, timeout=300) {
+    console.log("hi");
+    let timer;
+    return (...args) => {
+      console.log("in return of debounce func");
+      clearTimeout(timer);
+      timer = setTimeout(() => {func.apply(this, args); }, timeout);
+    };
+  } 
   const inputValue = (search) => {
+    console.log('HI');
     //Display all meteorite Data when search is empty
     setInputData(search);
     if (search !== ""){
@@ -29,6 +39,8 @@ export default function Input(props) {
     }
     // console.log("search input: ", search);
   }
+
+  // const processChange = debounce(() => inputValue());
   useEffect(() => {
     axios.get('https://data.nasa.gov/resource/gh4g-9sfh.json')
     .then((res) => {
