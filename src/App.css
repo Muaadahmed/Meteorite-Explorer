@@ -2,6 +2,11 @@
   margin: 50px;
 }
 
+.inputBtn {
+  margin: 0 auto;
+  z-index: 1;
+  
+}
 form {
   width: 30%;
   margin: 0 auto;
@@ -12,4 +17,18 @@ form {
 
 form Button {
   width: 40%;
+}
+
+table,tr {
+  z-index: 1;
+  border: 1px solid;
+}
+
+th {
+  background-color: black;
+  color: white;
+}
+
+tr {
+  background-color: white;
 }

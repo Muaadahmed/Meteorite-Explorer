@@ -1,8 +1,6 @@
 import {formatDate} from './helpers';
 import FilterRow from './FilterRow';
 export default function Table(props) {
-  //If I have another filter table component that filters the data and the regular table just displays
-  //All meteorite and in the filter table component is executed here. The filter state is allocated in
   return (
     <table>
       <thead style={{margin: '50px 20px 50px 20px', textAlign: "left"}}>
@@ -33,7 +31,8 @@ export default function Table(props) {
                 <td style={{marginTop: '20px'}}>{!meteorite.geolocation ? "N/A" : meteorite.geolocation.longitude}</td>
               </tr>
             )
-          }) : <FilterRow filteredObj={props.meteoriteFiltered[0]}/>}
+          }) : <FilterRow filteredObj={props.meteoriteFiltered[0]}/>
+        }
       </tbody>
     </table>
   )};

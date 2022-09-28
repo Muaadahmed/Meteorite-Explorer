@@ -1,7 +1,10 @@
 import {formatDate} from './helpers';
 export default function FilterRow(props) {
+  console.log('filtered obj: ', props.filteredObj);
+  if (props.filteredObj === undefined) {
+    return;
+  }
   return(
-    
     <tr>
       <td>{props.filteredObj.name}</td>
       <td>{props.filteredObj.id}</td>
