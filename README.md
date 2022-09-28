@@ -1,7 +1,13 @@
 # Meteorite Explorer
 
 ## About
+
 Meteorite Explorer is a client SPA built using the react library. It allows users to query NASAs Meteorite Landing Dataset.
+
+## Major Functions
+
+- Search panel with button instantly filters through 1000s of data points matching the query with the name of meteor. 
+- Notifications for when API is down or not functioning and when the query doesn't match the dataset.
 
 ## Setup
 
