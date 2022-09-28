@@ -21,7 +21,7 @@ function App() {
   }, []);
   const [meteoriteInfo, setMeteoriteInfo] = useState([]);
   useEffect(() => {
-    axios.get('https://data.nasa.gov/resource/gh4g-9fh.json')
+    axios.get('https://data.nasa.gov/resource/gh4g-9sfh.json')
     .then((res) => {
       setMeteoriteInfo(res.data);
     })
