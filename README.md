@@ -15,7 +15,6 @@ Install dependencies with `npm install`.
 
 Open [https://meteorite-explorer-1.herokuapp.com/](Meteorite Explorer) to view it in your browser.
 
-# Getting Started
+## Product
 
-1. Install all dependencies using npm install.
-2. Run the Webpack-Development-Server with npm run start.
+
