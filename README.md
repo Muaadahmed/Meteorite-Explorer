@@ -5,15 +5,15 @@ Meteorite Explorer is a client SPA built using the react library. It allows user
 
 ## Setup
 
-In the project directory, you can run:
+Install dependencies with `npm install`.
+
+## Running Webpack Development Server
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Heroku Deployment
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Open [https://meteorite-explorer-1.herokuapp.com/](Meteorite Explorer) to view it in your browser.
 
 # Getting Started
 
